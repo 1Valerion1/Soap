@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            padding: 20px;
+            color: #333;
+        }
+
+        p {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            width: fit-content;
+        }
+
+        p:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Movie</h1>
+    <!-- Добавьте форму здесь -->
+    <form id="genreForm" method="get" action="/movies/">
+        <input id="genreInput" type="text" name="genre" required>
+        <button type="submit">Get Movie</button>
+    </form>
+
+    <p th:text="'Title: ' + ${movie.title}" />
+    <p th:text="'Genre: ' + ${movie.genre}" />
+    <p th:text="'Author: ' + ${movie.author}" />
+    <p th:text="'Duration: ' + ${movie.duration}" />
+    <p th:text="'Rating: ' + ${movie.rating}" />
+</div>
+<script type="text/javascript">
+    window.onload = function() {
+        const form = document.getElementById("genreForm");
+        const input = document.getElementById("genreInput");
+        form.onsubmit = function() {
+            form.action = `/movies/${encodeURIComponent(input.value)}`;
+        }
+    };
+</script>
+</body>
+</html>
